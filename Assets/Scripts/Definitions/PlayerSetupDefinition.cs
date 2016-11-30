@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 [System.Serializable]
-public class PlayerSetupDefinition {
+public class PlayerSetupDefinition  {
 
 	public string Name;
 
@@ -10,7 +10,7 @@ public class PlayerSetupDefinition {
 
 	public Color AccentColor;
 
-	public List<GameObject> StartingUnits = new List<GameObject> ();
+	public List<GameObject> StartingUnits = new List<GameObject>();
 
 	private List<GameObject> activeUnits = new List<GameObject> ();
 

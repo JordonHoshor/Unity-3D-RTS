@@ -9,38 +9,44 @@ public class ActionsManager : MonoBehaviour {
 
 	public Button[] Buttons;
 
-	private List<Action> actionCalls = new List<Action> ();
+	private List<Action> actionCalls = new List<Action>();
 
-	public ActionsManager() {
+	public ActionsManager()
+	{
 		Current = this;
 	}
 
-	public void ClearButtons() {
+	public void ClearButtons()
+	{
 		foreach (var b in Buttons)
 			b.gameObject.SetActive (false);
 
 		actionCalls.Clear ();
 	}
 
-	public void AddButton(Sprite pic, Action onClick) {
+	public void AddButton(Sprite pic, Action onClick)
+	{
 		int index = actionCalls.Count;
 		Buttons [index].gameObject.SetActive (true);
 		Buttons [index].GetComponent<Image> ().sprite = pic;
 		actionCalls.Add (onClick);
 	}
 
-	public void OnButtonClick(int index) {
+	public void OnButtonClick (int index)
+	{
 		actionCalls [index] ();
 	}
+
 
 	// Use this for initialization
 	void Start () {
 		for (int i = 0; i < Buttons.Length; i++) {
 			var index = i;
-			Buttons[index].onClick.AddListener (delegate() {
+			Buttons[index].onClick.AddListener(delegate() {
 				OnButtonClick (index);
 			});
 		}
+
 		ClearButtons ();
 	}
 }

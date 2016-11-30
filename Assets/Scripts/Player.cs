@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour {
 
@@ -7,11 +7,13 @@ public class Player : MonoBehaviour {
 
 	public static PlayerSetupDefinition Default;
 
-	void Start() {
+	void Start()
+	{
 		Info.ActiveUnits.Add (this.gameObject);
 	}
 
-	void OnDestroy() {
+	void OnDestroy()
+	{
 		Info.ActiveUnits.Remove (this.gameObject);
 	}
 }

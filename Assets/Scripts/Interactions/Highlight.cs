@@ -5,16 +5,18 @@ public class Highlight : Interaction {
 
 	public GameObject DisplayItem;
 
-	public override void Deselect() {
+	public override void Deselect ()
+	{
 		DisplayItem.SetActive (false);
 	}
 
-	public override void Select() {
+	public override void Select ()
+	{
 		DisplayItem.SetActive (true);
 	}
 
 	// Use this for initialization
-	void Start() {
+	void Start () {
 		DisplayItem.SetActive (false);
 	}
 }

@@ -29,6 +29,7 @@ public class RtsManager : MonoBehaviour {
 				if (!p.IsAi) {
 					if (Player.Default == null) Player.Default = p;
 					go.AddComponent<RightClickNavigation> ();
+					go.AddComponent<ActionSelect> ();
 				}
 			}
 		}

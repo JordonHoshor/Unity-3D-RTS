@@ -19,7 +19,7 @@ public class RtsManager : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		Current = this;
 		foreach (var p in Players) {
 			foreach (var u in p.StartingUnits) {
@@ -35,7 +35,7 @@ public class RtsManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 	
 	}
 }

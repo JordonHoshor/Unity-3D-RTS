@@ -13,12 +13,12 @@ public class Map : MonoBehaviour {
 
 	private RectTransform mapRect;
 
-	public Map () {
+	public Map() {
 		Current = this;
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		terrainSize = new Vector2 (
 			Corner2.position.x - Corner1.position.x, Corner2.position.z - Corner1.position.z);
 
@@ -34,7 +34,7 @@ public class Map : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 		ViewPort.position = WorldPositionToMap (Camera.main.transform.position);
 	}
 }

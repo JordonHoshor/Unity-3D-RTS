@@ -3,6 +3,9 @@ using System.Collections;
 
 public class CreateBuildingAction : ActionBehavior {
 
+	public GameObject BuildingPrefab;
+	public float MaxBuildDistance = 50;
+
 	public GameObject GhostBuildingPrefab;
 	private GameObject active = null;
 
@@ -10,7 +13,11 @@ public class CreateBuildingAction : ActionBehavior {
 	{
 		return delegate() {
 			var go = GameObject.Instantiate(GhostBuildingPrefab);
-			go.AddComponent<FindBuildingSite>();
+			var finder = go.AddComponent<FindBuildingSite>();
+			finder.BuildingPrefab = BuildingPrefab;
+			finder.MaxBuildDistance = MaxBuildDistance;
+			finder.Info = GetComponent<Player> ().Info;
+			finder.Source = transform;
 			active = go;
 		};
 	}

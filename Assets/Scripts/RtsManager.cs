@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 
 public class RtsManager : MonoBehaviour {
@@ -10,8 +11,7 @@ public class RtsManager : MonoBehaviour {
 
 	public TerrainCollider MapCollider;
 
-	public Vector3? ScreenPointToMapPosition(Vector2 point)
-	{
+	public Vector3? ScreenPointToMapPosition(Vector2 point) {
 		var ray = Camera.main.ScreenPointToRay (point);
 		RaycastHit hit;
 		if (!MapCollider.Raycast (ray, out hit, Mathf.Infinity))
@@ -21,6 +21,29 @@ public class RtsManager : MonoBehaviour {
 	}
 
 	public bool IsGameObjectSafeToPlace(GameObject go) {
+		var verts = go.GetComponent<MeshFilter> ().mesh.vertices;
+		var obstacles = GameObject.FindObjectsOfType<NavMeshObstacle> ();
+		var cols = new List<Collider> ();
+
+		foreach (var o in obstacles) {
+			if (o.gameObject != go) {
+				cols.Add (o.gameObject.GetComponent<Collider> ());
+			}
+		}
+
+		foreach (var v in verts) {
+			NavMeshHit hit;
+			var vReal = go.transform.TransformPoint (v);
+			NavMesh.SamplePosition (vReal, out hit, 100, NavMesh.AllAreas);
+
+			bool onXAxis = Mathf.Abs (hit.position.x - vReal.x) < 0.5f;
+			bool onZAxis = Mathf.Abs (hit.position.z - vReal.z) < 0.5f;
+			bool hitCollider = cols.Any (c => c.bounds.Contains (vReal));
+
+			if (!onXAxis || !onZAxis || hitCollider) {
+				return false;
+			}
+		}
 		return true;
 	}
 
